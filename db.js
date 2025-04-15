@@ -1,32 +1,43 @@
-const { Sequelize, DataTypes } = require("sequelize");
-
-// 从环境变量中读取数据库配置
-const { MYSQL_USERNAME, MYSQL_PASSWORD, MYSQL_ADDRESS = "" } = process.env;
-
-const [host, port] = MYSQL_ADDRESS.split(":");
-
-const sequelize = new Sequelize("nodejs_demo", MYSQL_USERNAME, MYSQL_PASSWORD, {
-  host,
-  port,
-  dialect: "mysql" /* one of 'mysql' | 'mariadb' | 'postgres' | 'mssql' */,
-});
-
-// 定义数据模型
-const Counter = sequelize.define("Counter", {
-  count: {
-    type: DataTypes.INTEGER,
-    allowNull: false,
-    defaultValue: 1,
-  },
-});
-
-// 数据库初始化方法
-async function init() {
-  await Counter.sync({ alter: true });
+//const sql = require("mssql")
+const mysql = require("mysql")
+// 数据库配置
+const config = {
+  user: "ZeroX_manage",//"LiHongjun1",
+  password: "ZeroX2025",//"lhj123456",
+  host: "sh-cynosdbmysql-grp-3uxh66gs.sql.tencentcdb.com",
+  database: "wechat_qrinfo",//"WechatDatabase",
+  port: "22363",
+  connectionLimit: "30"
+  // options:{
+  //   encrypt: true, //启动加密
+  //   trustServerCertificate: true, //信任自签名证书
+  // }
 }
 
-// 导出初始化方法和模型
-module.exports = {
-  init,
-  Counter,
-};
+// 创建连接池
+// const poolPromise = new sql.ConnectionPool(config)
+//     .connect()
+//     .then(pool => {
+//         console.log('Connected to SQL Server');
+//         return pool;
+//     })
+//     .catch(err => {
+//         console.error('Database Connection Failed:', err);
+//         throw err;
+//     });
+
+// module.exports = { sql, poolPromise };
+
+const poolPromise = mysql.createPool(config);
+
+// 测试连接是否成功
+poolPromise.getConnection((err, connection) => {
+  if (err) {
+    console.error('MySQL 连接失败:', err);
+    throw err;
+  }
+  console.log('成功连接到 MySQL 数据库');
+  connection.release(); // 释放连接回池
+});
+
+module.exports = { mysql, poolPromise };
