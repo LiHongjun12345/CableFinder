@@ -251,7 +251,7 @@ app.post('/api/scanCode', async (req, res) => {
 
 // // 启动服务器
 app.listen(port, () => {
-    console.log(`Server is running on sh-cynosdbmysql-grp-3uxh66gs.sql.tencentcdb.com:${port}`);
+    console.log(`Server is running on https://sh-cynosdbmysql-grp-3uxh66gs.sql.tencentcdb.com:${port}`);
 });
 
 // 查询数据示例
