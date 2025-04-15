@@ -278,7 +278,7 @@ poolPromise.query('SELECT * FROM qr_info', (err, results) => {
   async function getData() {
     try {
       const data = await queryAsync('SELECT * FROM qr_info');
-      console.log("ddd: ",data);
+      console.log(data);
     } catch (err) {
       console.error(err);
     }
