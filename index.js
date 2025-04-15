@@ -7,7 +7,7 @@ const { mysql, poolPromise } = require('./db');
 
 const app = express();
 // app.use(express.json());
-const port = 22363;
+const port = 80;
 
 // // 中间件
 app.use(bodyParser.json());
@@ -41,6 +41,7 @@ app.get('/api/Checkdata', async (req, res) => {
 });
 
 app.get('/api/CableList', async (req, res) => {
+  console.log("shoudao!!");
     try {
         const pool = await poolPromise;
         const getresult0 = await pool.request().query('SELECT SN, CableUser0, CableUser1 FROM QR_info order by Timestamp desc');
@@ -53,7 +54,7 @@ app.get('/api/CableList', async (req, res) => {
                     `);
             }
         }
-        const result = await pool.request().query(`SELECT SN, CableUser0, CableUser1 FROM QR_info`);
+        const result = await pool.request().query(`SELECT SN, CableUser0, CableUser1 FROM qr_info`);
         return res.json(result.recordset);
     } catch (err) {
         console.error('Error fetching data:', err);
@@ -277,7 +278,7 @@ poolPromise.query('SELECT * FROM qr_info', (err, results) => {
   async function getData() {
     try {
       const data = await queryAsync('SELECT * FROM qr_info');
-      console.log(data);
+      console.log("ddd: ",data);
     } catch (err) {
       console.error(err);
     }
