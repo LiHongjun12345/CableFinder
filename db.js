@@ -4,9 +4,9 @@ const mysql = require("mysql")
 const config = {
   user: "ZeroX_manage",//"LiHongjun1",
   password: "ZeroX2025",//"lhj123456",
-  host: "sh-cynosdbmysql-grp-3uxh66gs.sql.tencentcdb.com",
+  host: "10.6.101.7",//"sh-cynosdbmysql-grp-3uxh66gs.sql.tencentcdb.com",
   database: "wechat_qrinfo",//"WechatDatabase",
-  port: "22363",
+  port: "3306",//"22363",
   connectionLimit: "30"
   // options:{
   //   encrypt: true, //启动加密
