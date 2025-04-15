@@ -251,11 +251,11 @@ app.post('/api/scanCode', async (req, res) => {
 
 // // 启动服务器
 app.listen(port, () => {
-    console.log(`Server is running on http://sh-cynosdbmysql-grp-3uxh66gs.sql.tencentcdb.com:${port}`);
+    console.log(`Server is running on sh-cynosdbmysql-grp-3uxh66gs.sql.tencentcdb.com:${port}`);
 });
 
 // 查询数据示例
-poolPromise.query('SELECT * FROM sample_manage', (err, results) => {
+poolPromise.query('SELECT * FROM qr_info', (err, results) => {
     if (err) {
       console.error('查询失败:', err);
       return;
