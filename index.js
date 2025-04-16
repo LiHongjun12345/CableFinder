@@ -7,7 +7,6 @@ const { mysql, poolPromise } = require('./db');
 
 const app = express();
 // app.use(express.json());
-const port = 3306;
 
 // // 中间件
 app.use(bodyParser.json());
@@ -44,7 +43,7 @@ app.get('/api/CableList', async (req, res) => {
   console.log("shoudao!!");
     try {
         const pool = await poolPromise;
-        const getresult0 = await pool.request().query('SELECT SN, CableUser0, CableUser1 FROM QR_info order by Timestamp desc');
+        const getresult0 = await pool.request().query('SELECT SN, CableUser0, CableUser1 FROM qr_info order by Timestamp desc');
         for (let row of getresult0.recordset) {
             if (!row.CableUser1 || row.CableUser1.trim() === '') {
                 await pool.request().query(`
@@ -251,8 +250,8 @@ app.post('/api/scanCode', async (req, res) => {
 
 
 // // 启动服务器
-app.listen(port, () => {
-    console.log(`Server is running on 10.6.101.7:${port}`);
+app.listen(80, () => {
+    console.log(`Server is running`);
 });
 
 // 查询数据示例
