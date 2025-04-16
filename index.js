@@ -7,7 +7,7 @@ const { mysql, poolPromise } = require('./db');
 
 const app = express();
 // app.use(express.json());
-const port = 80;
+const port = 3306;
 
 // // 中间件
 app.use(bodyParser.json());
@@ -252,7 +252,7 @@ app.post('/api/scanCode', async (req, res) => {
 
 // // 启动服务器
 app.listen(port, () => {
-    console.log(`Server is running on https://sh-cynosdbmysql-grp-3uxh66gs.sql.tencentcdb.com:${port}`);
+    console.log(`Server is running on 10.6.101.7:${port}`);
 });
 
 // 查询数据示例
