@@ -6,7 +6,7 @@ const bodyParser = require('body-parser');
 const { mysql, poolPromise } = require('./db');
 
 const app = express();
-// app.use(express.json());
+app.use(express.json());
 
 // // 中间件
 app.use(bodyParser.json());
@@ -255,32 +255,32 @@ app.listen(80, () => {
 });
 
 // 查询数据示例
-poolPromise.query('SELECT * FROM qr_info', (err, results) => {
-    if (err) {
-      console.error('查询失败:', err);
-      return;
-    }
-    console.log('查询结果:', results);
-  });
+// poolPromise.query('SELECT * FROM qr_info', (err, results) => {
+//     if (err) {
+//       console.error('查询失败:', err);
+//       return;
+//     }
+//     console.log('查询结果:', results);
+//   });
   
-  // 使用 Promise 风格（推荐）
-  const queryAsync = (sql, params) => {
-    return new Promise((resolve, reject) => {
-      poolPromise.query(sql, params, (err, results) => {
-        if (err) reject(err);
-        else resolve(results);
-      });
-    });
-  };
+//   // 使用 Promise 风格（推荐）
+//   const queryAsync = (sql, params) => {
+//     return new Promise((resolve, reject) => {
+//       poolPromise.query(sql, params, (err, results) => {
+//         if (err) reject(err);
+//         else resolve(results);
+//       });
+//     });
+//   };
   
-  // 异步查询示例
-  async function getData() {
-    try {
-      const data = await queryAsync('SELECT * FROM qr_info');
-      console.log(data);
-    } catch (err) {
-      console.error(err);
-    }
-  }
+//   // 异步查询示例
+//   async function getData() {
+//     try {
+//       const data = await queryAsync('SELECT * FROM qr_info');
+//       console.log(data);
+//     } catch (err) {
+//       console.error(err);
+//     }
+//   }
   
-  getData();
+//   getData();
